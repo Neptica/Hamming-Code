@@ -5,26 +5,21 @@
 
 int main() {
   std::string word = Functions::input_string();
-  std::cout << word << "\n";
-
-  int bit_count =
-      word.size(); // 56 bits, plus 6 hamming, one parity and one extra bit
-
-  // TODO: have to move the preamble after the hamming code
-  // preamble/pad are ones followed by a NULL byte
   std::string padded_word = Functions::pad(word);
-  std::cout << padded_word << " with a size of : " << padded_word.size()
-            << "\n";
 
-  std::cout << bit_count << "\n";
   std::string codeword = "";
   int i;
-  for (i = 0; i < bit_count; i += 56) {
-    std::cout << " this is i : " << i << "\n";
-    codeword += Functions::hammit(word.substr(i, i + 56));
+  for (i = 0; i < padded_word.size(); i += 56) {
+    std::string substring = padded_word.substr(i, 56);
+    // std::cout << " this is the substr : " << substring
+    //           << " and this is its size " << substring.size();
+    codeword += Functions::hammit(substring);
   }
-  if (i + 56 < bit_count) {
-    codeword += Functions::hammit(word.substr(i, bit_count - 1));
-  }
-  std::cout << codeword << "\n";
+  // for (int i = 0; i < codeword.size(); i++) {
+  //   std::cout << (i + 1) % 64 << ": " << codeword[i] << "\n";
+  // }
+  // if (i + 56 < bit_count) {
+  //   codeword += Functions::hammit(word.substr(i, bit_count - 1));
+  // }
+  // std::cout << codeword.size() << "\n";
 }
