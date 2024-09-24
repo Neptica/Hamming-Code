@@ -13,4 +13,8 @@ int main() {
     codeword += Functions::hammit(substring);
   }
   std::cout << "word after hamming  : " << codeword << "\n";
+  codeword = Functions::bit_flip(codeword);
+  std::cout << "word after bitflip  : " << codeword << "\n";
+  codeword = Functions::ecc_func(codeword);
+  std::cout << "word after correct  : " << codeword << "\n";
 }
